@@ -1,0 +1,137 @@
+Logging Requirements Cheat Sheet
+
+1.	FACTORS: RACI
+  1.1.	Regulatory
+    1.1.1.	Financial
+      □	Gramm-Leach-Bliley Act (GLBA) (privacy)
+      □	J-SOX (Japanese equivalent)
+      □	Sarbanes Oxley (SOX)
+    1.1.2.	Technology and Telecommunications 
+      □	CTIA – The Wireless Association
+      □	Federal Communications Commission
+      □	Ministry of Internal Affairs and Communications (Japan)
+      □	National Association of Regulatory Utility Commissioners
+      □	Payment Card Industry – Data Security Standards (PCI-DSS)
+      □	International Organization of Standards (ISO) ___________(enter standard number) 
+      □	National Institute of Standards and Technology _________(enter standard number)
+      □	Personally Identifiable Information (US States)_______(enter specific state or “all”)
+      □	European E-Privacy (EU Directive 2002/58 on Privacy and Electronic Communications)
+    
+    1.1.3.	Health/Medical
+      □	Centers for Disease Control and Prevention
+      □	Clinical Laboratory Improvement
+      □	Department of Health and Human Services
+      □	Electronic Medicare Claims Submission  
+      □	Food and Drug Administration
+      □	Health Insurance Issuers Implementing Medical Loss Ratio (MLR) Requirements Under the Patient Protection and Affordable Care Act 
+      □	HIPPA HiTech
+      □	Medicaid
+      □	Medicare
+  1.2.	Accessibility
+    How quickly does the customer need to access logs, please review the system disaster recovery classification table below and ensure their request aligns.
+  1.3.	Contractual Requirements
+    *System Criticality	  Availability	  RTO	    RPO	    Remote Replication	  Local Replication	  +Failover
+    Vital	                99.999%	        30min	  0 loss	Yes	                  Yes	                A/A
+    Critical	            99.99%	        2hrs	  15min	  Yes	                  Yes	                A/A
+    Discretionary	        99.9%	          24hrs	  2-6hrs	No	                  Maybe	              A/A or A/P
+    Important	            99%	            2 days	12-24hr	No	                  No	                A/P
+    
+    A/A = Active/Active
+    A/P = Active/Passive
+    
+  1.4.	Investigative
+  
+2.	What to Log
+  The detail and granularity of information captured should be commensurate with the DR classification above and the Data Classification of the system and in compliance with any regulatory requirements.  For example, all authentication success AND failures would be logged for all systems of the highest classifications but the lowest may only log failed attempts.
+  □	Type of Event
+  □	Date & Time (including seconds and preferably milliseconds)
+  □	Successes AND Failures
+  □	Origination of Event
+  □	Identity of Affected data/system/resource
+3.	How
+  □	Secure, unable to be altered 
+  □	Encrypted at disk level
+  □	Encrypted at file level as it is written
+  □	Secure, unable to be accessed unless required by duties
+  □	Encrypted at disk level
+  □	Encrypted at file level as it is written
+  Choose One
+  □	Mandatory Access Control (MAC) access is based on security labels (Public, Confidential, Sensitive) and categories (Job Title i.e. manager, Department, Project Name)
+  □	Role Base Access Control (RoBAC) where the user’s job function is used to determine access– users can only be assigned to ONE ROLE, this is not the same as groups.  Example:  All accountants get the same access regardless of job title as manager or clerk
+4.	Where to Store It?
+  4.1.	ALL SYSTEMS
+    □	90 days, On-hand, local copy
+    □	1 year historical, local copy
+    4.2.	Public <Lowest Classification Level> Systems
+    □	Local live
+    □	Local back-up
+  4.3.	Confidential <Internal Use Only Classification> Systems
+    □	Local live
+    □	Local back-up
+    □	Remote, off-site
+  4.4.	Sensitive <highest classification> Systems
+    □	Local live
+    □	Local back-up
+    □	Remote Archive, off-site
+    □	Tape Backup, off-site
+    
+5.	When (How Long)
+  5.1.	ALL SYSTEMS
+    □	90 days, On-hand, local copy
+    □	1 year historical
+  5.2.	Public Systems
+    □	Needs to be defined by organization, then replace this text
+  5.3.	Confidential Systems
+    □	Needs to be defined by organization, then replace this text
+  5.4.	Sensitive Systems
+    □	Needs to be defined by organization, then replace this text
+
+NOTE:  Sensitive Systems are usually equivocal to regulated systems. 
+Here are some highlights on some regulatory retention requirements:
+SOX = 7yrs
+HIPPA = 6yrs
+PCI-DSS = 1yr
+
+6.	Regulations
+  6.1.	SOX – 7 YEARS
+    6.1.1.	 If log data becomes evidence that is used in court, the organization must show proper chain of custody not only of the audit records, but also of log data and prove that the integrity has not been compromised over that 7 year period
+    6.1.2.	This data must be encrypted leveraging cryptographic hashing to assure data integrity and prove in a court of law that the data has not been tampered with
+  6.2.	PCI-DSS 3.0 – 1 YEAR
+    6.2.1.	(A.1.3) Ensure logging and audit trails are enabled and unique to each entity’s cardholder data environment and consistent with PCI DSS Requirement 10. 
+      •	(A.1.3) Verify the shared hosting provider has enabled logging as
+      follows, for each merchant and service provider environment:  
+      o	Logs are enabled for common third-party applications
+      o	Logs are active by default
+      o	Logs are available for review by the owning entity
+      o	Log locations are clearly communicated to the owning entity
+      6.2.2.	(10.1) Implement audit trails to link all access to system components to each individual user
+      6.2.3.	(10.2) Implement automated audit trails for all system components to reconstruct the following events:   
+      •	(10.2.1) All individual user accesses to cardholder data 
+      •	(10.2.2) All actions taken by any individual with root or administrative privileges 
+      •	(10.2.3) Access to all audit trails 
+      •	(10.2.4) Invalid logical access attempts 
+      •	(10.2 5) Use of and changes to identification and authentication mechanisms—including but not limited to creation of new accounts and elevation of privileges—and all changes, additions, or deletions to accounts with root or administrative privileges
+      •	(10.2.6) Initialization, stopping, or pausing of the audit logs
+      •	(10.2.7) Creation and deletion of system level objects 
+    6.2.4.	(10.5) Secure audit trails so they cannot be altered. 
+      •	(10.5.1) Limit viewing of audit trails to those with a job-related need
+      •	(10.5.2) Protect audit trail files from unauthorized modifications
+      •	(10.5.3) Promptly back up audit trail files to a centralized log server or media that is difficult to alter
+      •	(10.5.4) Write logs for external-facing technologies onto a secure, centralized, internal log server or media device
+      •	(10.5.5) Use file-integrity monitoring or change-detection software on logs to ensure that existing log data cannot be changed without generating alerts (although new  data being added should not cause an alert)
+    6.2.5.	10.6 Review logs and security events for all system components to identify anomalies or suspicious activity
+     **Note: Log harvesting, parsing, and alerting tools may be used to meet this Requirement. 
+      •	(10.6.1) Review the following at least daily: 
+      o	 All security events 
+      o	Logs of all system components that  store, process, or transmit CHD and/or SAD, or that could impact the security of CHD and/or SAD  
+      o	Logs of all critical system components 
+      o	Logs of all servers and system components that perform security functions (for example, firewalls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers, e-commerce redirection servers, etc.)
+      •	(10.7) Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis (for example, online, archived, or restorable from backup)
+  6.3.	HIPPA (NIST 800-66)
+    •	(4.1.7) Implement procedures to regularly review records of information system activity, such as audit logs, access reports, and security incident tracking reports. 
+    •	(4.1.8) Determine the types of audit trail data and monitoring procedures that will be needed to derive exception reports
+    •	(4.1.9) Activate the necessary review process. Begin auditing and logging activity. 
+    •	(4.14.3) Ensure that system activity can be traced to a specific user. Ensure that the necessary data is available in the system logs to support audit and other related business functions
+    •	(4.15.5)  Activate the necessary audit system. Begin logging and auditing procedures
+    •	(4.16.4) Identify and implement methods that will be used to protect the information from modification. Identify and implement tools and techniques to be developed  or procured that support the assurance of integrity 
+    •	(4.22.2)  Retain Documentation for at Least Six Years 
