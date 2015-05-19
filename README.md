@@ -6,9 +6,9 @@ Note: .xmind files can be read using freemind (http://www.xmind.net/)
 
 https://www.dropbox.com/sh/iu8wgkekh6d4pec/AABxoB5saMy1Tx22weCPo5kTa?dl=0
 
-'''
-01A-Risk Assessment - Business Questionnaire_HC.docx
-Document Lifecycle Management Process Template.docx
+
+<p>01A-Risk Assessment - Business Questionnaire_HC.docx</p>
+<p>Document Lifecycle Management Process Template.docx</p>
 Documentation Process.vsd
 Logging Requirements Cheat Sheet.docx
 Logging Requirements.xmind
@@ -16,5 +16,5 @@ Payment Card Industry Presentation 3.0-2.0-Deltas.pptx
 Security Education and Awareness Training (SEAT) Program Justification.docx
 Security Education, Awareness and Training Program Development.xmind
 System-Architecture-Template.docx
-'''
+
 
