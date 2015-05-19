@@ -12,6 +12,7 @@ Logging Requirements Cheat Sheet.docx
 Logging Requirements.xmind  
 Payment Card Industry Presentation 3.0-2.0-Deltas.pptx  
 Risk Assessment - Business Questionnaire_HC.docx  
+Risk Assessment System Criticality-Customer Worksheet.xlsx  
 Security Education and Awareness Training (SEAT) Program Justification.docx  
 Security Education, Awareness and Training Program Development.xmind  
 System-Architecture-Template.docx  
